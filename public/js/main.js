@@ -12,13 +12,32 @@ document.getElementById('upload-button')
             let genData = xml.getElementsByTagName('DisplayName')[0];
             let songs = Array.from(xml.getElementsByTagName('Song'));
             songs.forEach(song=>{
+                let div = document.createElement('div');
+                div.classList.add('song-wrapper');
                 let songTitle = song.getAttribute('Dir').split('/')[2];
                 let p = document.createElement('p');
                     p.innerHTML = songTitle;
-                let difficulty = Array.from(song.getElementsByTagName('Steps'))[0]
-                console.log(difficulty?.getAttribute('Difficulty'))
+                    div.appendChild(p)
+                let stepScore = Array.from(song.getElementsByTagName('Steps'))
+                if (stepScore){
+                    stepScore.forEach(step=>{
+                    console.log(step)
+                    let diffTxt = step.getAttribute('Difficulty');
+                    let pD = document.createElement('p');
+                    pD.innerHTML=diffTxt;
+                    p.appendChild(pD);
+                    let score = step.getElementsByTagName('PercentDP')[0];
+                    let span = document.createElement('span');
+                    span.textContent = score ? score.firstChild.nodeValue : "No Score Saved";
+                    p.appendChild(span);
+                })
+                } else {
+                    let pD = document.createElement('p');
+                    pD.textContent = "No Score Found";
+                    p.appendChild(pD);
+                }
                 let output = document.getElementById('output')
-                    output.appendChild(p);
+                    output.appendChild(div);
             })
         }
        fr.readAsText(document.getElementById('file-loader').files[0]);
