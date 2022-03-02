@@ -9,3 +9,8 @@ body {
 div#main-wrapper h1 {
     color: red;
 }
+
+div.song-wrapper {
+    border: 1px solid white;
+    margin: .5rem 1rem;
+}
