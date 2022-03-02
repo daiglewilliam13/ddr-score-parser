@@ -13,4 +13,19 @@ div#main-wrapper h1 {
 div.song-wrapper {
     border: 1px solid white;
     margin: .5rem 1rem;
+    padding: .5rem 1rem;
+    max-height: 1rem;
+    overflow:hidden;
+    transition: .5s;
+}
+
+div.song-wrapper:hover {
+    max-height: 10rem;
+}
+p {
+    margin:0;
+}
+
+p.tier {
+    padding: .5rem 0;
 }

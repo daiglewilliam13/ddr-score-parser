@@ -12,18 +12,19 @@ document.getElementById('upload-button')
             let genData = xml.getElementsByTagName('DisplayName')[0];
             let songs = Array.from(xml.getElementsByTagName('Song'));
             songs.forEach(song=>{
-                let div = document.createElement('div');
-                div.classList.add('song-wrapper');
+                let songWrapper = document.createElement('div');
+                songWrapper.classList.add('song-wrapper');
                 let songTitle = song.getAttribute('Dir').split('/')[2];
                 let p = document.createElement('p');
                     p.innerHTML = songTitle;
-                    div.appendChild(p)
+                    songWrapper.appendChild(p)
                 let stepScore = Array.from(song.getElementsByTagName('Steps'))
                 if (stepScore){
                     stepScore.forEach(step=>{
                     console.log(step)
                     let diffTxt = step.getAttribute('Difficulty');
                     let pD = document.createElement('p');
+                    pD.classList.add('tier')
                     pD.innerHTML=diffTxt;
                     p.appendChild(pD);
                     let score = step.getElementsByTagName('PercentDP')[0];
@@ -37,7 +38,7 @@ document.getElementById('upload-button')
                     p.appendChild(pD);
                 }
                 let output = document.getElementById('output')
-                    output.appendChild(div);
+                    output.appendChild(songWrapper);
             })
         }
        fr.readAsText(document.getElementById('file-loader').files[0]);
